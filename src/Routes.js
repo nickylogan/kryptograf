@@ -1,9 +1,9 @@
 import Home from './containers/Home';
 import Tool from './containers/Tool';
-import ToolAES from './containers/ToolAES';
-import ToolDSA from './containers/ToolDSA';
-import ToolECC from './containers/ToolECC';
-import ToolGCM from './containers/ToolGCM';
+import AES from './tools/aes/Index';
+import DSA from './tools/dsa/Index';
+import ECC from './tools/ecc/Index';
+import GCM from './tools/gcm/Index';
 import NotFound from './containers/NotFound';
 
 export const mainRoutes = [
@@ -28,21 +28,21 @@ export const toolRoutes = [
   {
     path: '/ecc',
     name: 'ECC',
-    component: ToolECC
+    component: ECC
   },
   {
     path: '/dsa',
     name: 'DSA',
-    component: ToolDSA
+    component: DSA
   },
   {
     path: '/gcm',
     name: 'GCM',
-    component: ToolGCM
+    component: GCM
   },
   {
     path: '/aes',
     name: 'AES',
-    component: ToolAES
+    component: AES
   }
 ];
