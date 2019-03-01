@@ -11,7 +11,7 @@ import * as serviceWorker from './serviceWorker';
 library.add(fas, far);
 
 ReactDOM.render(
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <App />
   </Router>,
   document.getElementById('root')
