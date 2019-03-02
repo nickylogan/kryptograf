@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import Generator from './Generator';
 import Sign from './Sign';
+import Verify from './Verify';
 
 class Index extends Component {
   render() {
@@ -13,6 +14,8 @@ class Index extends Component {
         <Generator />
         <hr/>
         <Sign />
+        <hr/>
+        <Verify />
       </Container>
     );
   }
