@@ -42,16 +42,6 @@ class Home extends Component {
                               </LinkContainer>
                             </td>
                           </tr>
-                          <tr>
-                            <td className="align-middle">Digital Signature Algorithm</td>
-                            <td className="text-right">
-                              <LinkContainer to="tools/dsa">
-                                <Button size="sm" variant="info">
-                                  <FontAwesomeIcon icon="key" />
-                                </Button>
-                              </LinkContainer>
-                            </td>
-                          </tr>
                         </tbody>
                       </Table>
                     </Card.Footer>
@@ -68,16 +58,6 @@ class Home extends Component {
                     <Card.Footer className="pb-0">
                       <Table size="sm" className="border-bottom">
                         <tbody>
-                          <tr>
-                            <td className="align-middle">Galois/Counter Mode</td>
-                            <td className="text-right">
-                              <LinkContainer to="tools/gcm">
-                                <Button size="sm" variant="info">
-                                  <FontAwesomeIcon icon="key" />
-                                </Button>
-                              </LinkContainer>
-                            </td>
-                          </tr>
                           <tr>
                             <td className="align-middle">Advanced Encryption Standard</td>
                             <td className="text-right">
