@@ -1,4 +1,4 @@
-import React, { Component, SyntheticEvent } from 'react';
+import React, { Component } from 'react';
 import { Row, Col, Form, Button, Table } from 'react-bootstrap';
 import Latex from 'react-latex';
 import ecurve from 'ecurve';
@@ -53,8 +53,6 @@ class Generator extends Component {
     event.preventDefault();
     event.stopPropagation();
     if (form.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
       let priv = crypto.randomBytes(32);
       let ecparams = ecurve.getCurveByName('secp256k1')
       let curvePt = ecparams.G.multiply(BigInteger.fromBuffer(priv));

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import Generator from './Generator';
+import Sign from './Sign';
 
 class Index extends Component {
   render() {
@@ -10,6 +11,8 @@ class Index extends Component {
         <h1 className="mb-5 font-weight-normal d-md-none">Elliptic Curve Cryptography (ECC)</h1>
         <hr/>
         <Generator />
+        <hr/>
+        <Sign />
       </Container>
     );
   }
