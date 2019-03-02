@@ -8,7 +8,9 @@
     "@fortawesome/free-regular-svg-icons": "^5.7.2",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "bigi": "^1.4.2",
     "bootstrap": "^4.3.1",
+    "ecurve": "^1.0.6",
     "gh-pages": "^2.0.1",
     "react": "^16.8.3",
     "react-bootstrap": "^1.0.0-beta.5",
@@ -16,7 +18,9 @@
     "react-latex": "^1.2.0",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.5",
+    "react-transition-group": "^2.6.0",
+    "secp256k1": "^3.6.2"
   },
   "scripts": {
     "start": "react-scripts start",
