@@ -36,7 +36,7 @@ class Home extends Component {
                             <td className="align-middle">Elliptic Curve Cryptography</td>
                             <td className="text-right">
                               <LinkContainer to="tools/ecc">
-                                <Button size="sm">
+                                <Button size="sm" variant="info">
                                   <FontAwesomeIcon icon="key" />
                                 </Button>
                               </LinkContainer>
@@ -46,7 +46,7 @@ class Home extends Component {
                             <td className="align-middle">Digital Signature Algorithm</td>
                             <td className="text-right">
                               <LinkContainer to="tools/dsa">
-                                <Button size="sm">
+                                <Button size="sm" variant="info">
                                   <FontAwesomeIcon icon="key" />
                                 </Button>
                               </LinkContainer>
@@ -72,7 +72,7 @@ class Home extends Component {
                             <td className="align-middle">Galois/Counter Mode</td>
                             <td className="text-right">
                               <LinkContainer to="tools/gcm">
-                                <Button size="sm">
+                                <Button size="sm" variant="info">
                                   <FontAwesomeIcon icon="key" />
                                 </Button>
                               </LinkContainer>
@@ -82,7 +82,7 @@ class Home extends Component {
                             <td className="align-middle">Advanced Encryption Standard</td>
                             <td className="text-right">
                               <LinkContainer to="tools/aes">
-                                <Button size="sm">
+                                <Button size="sm" variant="info">
                                   <FontAwesomeIcon icon="key" />
                                 </Button>
                               </LinkContainer>
