@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/kryptograf/static/css/main.3fb917ec.chunk.css"
   },
   {
-    "revision": "47ea8949aac552391b03d054cdafe066",
+    "revision": "75ca0cb62859bf8399434656936a16e6",
     "url": "/kryptograf/index.html"
   }
 ];
