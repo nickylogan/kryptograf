@@ -32,5 +32,10 @@ export const toolRoutes = [
     path: '/aes',
     name: 'AES',
     component: AES
+  },
+  {
+    path: '',
+    exact: false,
+    component: NotFound
   }
 ];

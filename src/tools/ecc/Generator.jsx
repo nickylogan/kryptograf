@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, Button, Table } from 'react-bootstrap';
-import Latex from 'react-latex';
+import { Row, Col, Form, Button } from 'react-bootstrap';
 import ecurve from 'ecurve';
 import crypto from 'crypto';
 import BigInteger from 'bigi';
-import { curves } from './utils';
 
 class Generator extends Component {
   constructor(...args) {
@@ -72,102 +70,12 @@ class Generator extends Component {
         <Col md="4">
           <h3 className="font-weight-normal">Keypair generator</h3>
           <p>
-            General curve form: <br />
-            <Latex>$y^2=x^3+ax+b$</Latex>
+            The keypair generator uses the <strong className="text-danger">secp256k1</strong> curve. 
+            Here's <a href="https://en.bitcoin.it/wiki/Secp256k1">more info</a> on how it works
           </p>
         </Col>
         <Col md="6">
           <Form noValidate validated={this.state.validated} onSubmit={e => this.handleGenerate(e)}>
-            <Form.Group controlId="genCurve">
-              <Form.Label as="small">Curve type</Form.Label>
-              <Form.Control
-                as="select"
-                onChange={e => this.handleChangeCurve(e)}
-                isInvalid={!this.state.validCurve}
-                required
-              >
-                <option defaultValue value="">
-                  Select any
-                </option>
-                {Object.values(curves).map((curve, index) => (
-                  <option value={curve} key={index}>
-                    {curve}
-                  </option>
-                ))}
-              </Form.Control>
-              <Form.Control.Feedback type="invalid">
-                Please select a valid elliptical curve
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Table size="sm">
-              <tbody>
-                <tr>
-                  <td className="align-middle" style={{ width: '10%' }}>
-                    <small>
-                      <Latex>$a$</Latex>
-                    </small>
-                  </td>
-                  <td className="align-middle" style={{ width: '5%' }}>
-                    <small className="text-monospace">=</small>
-                  </td>
-                  <td>
-                    <small className="text-monospace">{this.state.curve.a}</small>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="align-middle" style={{ width: '10%' }}>
-                    <small>
-                      <Latex>$b$</Latex>
-                    </small>
-                  </td>
-                  <td className="align-middle" style={{ width: '5%' }}>
-                    <small className="text-monospace">=</small>
-                  </td>
-                  <td>
-                    <small className="text-monospace">{this.state.curve.b}</small>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="align-middle" style={{ width: '10%' }}>
-                    <small>
-                      <Latex>$p$</Latex>
-                    </small>
-                  </td>
-                  <td className="align-middle" style={{ width: '5%' }}>
-                    <small className="text-monospace">=</small>
-                  </td>
-                  <td>
-                    <small className="text-monospace">{this.state.curve.p}</small>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="align-middle" style={{ width: '10%' }}>
-                    <small>
-                      <Latex>$G_x$</Latex>
-                    </small>
-                  </td>
-                  <td className="align-middle" style={{ width: '5%' }}>
-                    <small className="text-monospace">=</small>
-                  </td>
-                  <td>
-                    <small className="text-monospace">{this.state.curve.Gx}</small>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="align-middle" style={{ width: '10%' }}>
-                    <small>
-                      <Latex>$G_y$</Latex>
-                    </small>
-                  </td>
-                  <td className="align-middle" style={{ width: '5%' }}>
-                    <small className="text-monospace">=</small>
-                  </td>
-                  <td>
-                    <small className="text-monospace">{this.state.curve.Gy}</small>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
             <Form.Group controlId="genPrivKey">
               <Form.Label as="small">Private key</Form.Label>
               <Form.Control as="textarea" rows="3" size="sm" type="text" className="text-monospace" disabled value={this.state.priv}/>
