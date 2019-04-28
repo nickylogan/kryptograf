@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, Button, Alert } from 'react-bootstrap';
+import crypto from 'crypto';
 import { ec as EC } from 'elliptic';
 
 class Verify extends Component {
@@ -8,9 +9,10 @@ class Verify extends Component {
 
     this.state = {
       validPub: true,
-      validHash: true,
+      validMessage: true,
       validSignature: true,
       verified: 0,
+      message: '',
       hash: '',
       signature: '',
       pub: ''
@@ -21,10 +23,10 @@ class Verify extends Component {
    * @param {SyntheticEvent} event
    */
   handleVerify(event) {
-    const { hash, signature, pub } = this.state;
-    const { validSignature, validHash, validPub } = this.state;
-    if (!hash) {
-      this.setState({ validHash: false });
+    const { message, signature, pub } = this.state;
+    const { validSignature, validMessage, validPub } = this.state;
+    if (!message) {
+      this.setState({ validMessage: false });
     }
     if (!signature) {
       this.setState({ validSignature: false });
@@ -32,25 +34,36 @@ class Verify extends Component {
     if (!pub) {
       this.setState({ validPub: false });
     }
-    if (!validSignature || !validHash || !validPub) {
+    if (!validSignature || !validMessage || !validPub) {
       return;
     }
     const ec = new EC('secp256k1');
-    let hashBuf = Buffer.from(hash, 'hex');
+    let messageBuf = Buffer.from(message, 'utf8');
+    let hashBuf = crypto
+      .createHash('sha256')
+      .update(messageBuf)
+      .digest();
     let key = ec.keyFromPublic(pub, 'hex');
+    let verified;
+    try {
+      verified = key.verify(hashBuf, signature) ? 1 : -1;
+    } catch(e) {
+      verified = -1;
+    }
     this.setState({
-      verified: key.verify(hashBuf, signature) ? 1 : -1
+      hash: hashBuf.toString('hex'),
+      verified: verified
     });
   }
 
   /**
    * @param {SyntheticEvent} event
    */
-  handleChangeHash(event) {
+  handleChangeMessage(event) {
     let value = event.target.value;
     this.setState({
-      hash: value,
-      validHash: !!value.match(/^[0-9a-f]{64}$/i)
+      message: value,
+      validMessage: !!value
     });
   }
 
@@ -77,12 +90,12 @@ class Verify extends Component {
   }
 
   render() {
-    const { hash, signature, pub, verified } = this.state;
-    const { validSignature, validHash, validPub } = this.state;
+    const { message, hash, signature, pub, verified } = this.state;
+    const { validSignature, validMessage, validPub } = this.state;
     return (
       <Row>
         <Col md="4">
-          <h3 className="font-weight-normal">Signature verification</h3>
+          <h3 className="font-weight-normal"><span className="text-monospace text-info">#3</span> Signature verification</h3>
           <p>
             The signature verification algorithm only supports{' '}
             <strong className="text-danger">secp256k1</strong> curve
@@ -91,18 +104,29 @@ class Verify extends Component {
         <Col md="6">
           <Form>
             <Form.Group controlId="verHash">
+              <Form.Label as="small">Message to verify</Form.Label>
+              <Form.Control
+                size="sm"
+                type="text"
+                className={`text-monospace ${validMessage ? '' : 'is-invalid'}`}
+                value={message}
+                onChange={e => this.handleChangeMessage(e)}
+                placeholder="e.g. hello world!"
+              />
+              <Form.Text className="text-danger">
+                {validMessage ? '' : 'Message cannot be empty'}
+              </Form.Text>
+            </Form.Group>
+            <Form.Group controlId="verMessage">
               <Form.Label as="small">Hash (SHA-256)</Form.Label>
               <Form.Control
                 size="sm"
                 type="text"
-                className={`text-monospace ${validHash ? '' : 'is-invalid'}`}
+                className="text-monospace"
+                disabled
                 value={hash}
-                onChange={e => this.handleChangeHash(e)}
-                placeholder="e.g. 0f1e2d3c4b5a69788796a5b4c3d2e1f0f0e1d2c3b4a5968778695a4b3c2d1e0f"
+                placeholder="The message hash will appear here"
               />
-              <Form.Text className="text-danger">
-                {validHash ? '' : 'Hash must be a 256-bit hexadecimal string'}
-              </Form.Text>
             </Form.Group>
             <Form.Group controlId="verSignature">
               <Form.Label as="small">Signature (in DER format)</Form.Label>
@@ -114,7 +138,7 @@ class Verify extends Component {
                 className={`text-monospace ${validSignature ? '' : 'is-invalid'}`}
                 value={signature}
                 onChange={e => this.handleChangeSignature(e)}
-                placeholder="place the DER signature as a hex string"
+                placeholder="Place the DER signature as a hex string. Use the one generated from (#2)"
               />
               <Form.Text className="text-danger">
                 {validSignature ? '' : 'Signature cannot be empty'}
@@ -130,12 +154,12 @@ class Verify extends Component {
                 className={`text-monospace ${validPub ? '' : 'is-invalid'}`}
                 value={pub}
                 onChange={e => this.handleChangePubKey(e)}
-                placeholder="public key starting with '04'"
+                placeholder="The public key starting with '04'. Use the public key generated from (#1)."
               />
               <Form.Text className="text-danger">
                 {validPub
                   ? ''
-                  : 'Public key must be a 520-bit hexadecimal string starting with 0x04'}
+                  : 'Public key must be a 520-bit hexadecimal string starting with \'04\''}
               </Form.Text>
             </Form.Group>
             {verified !== 0 ? (

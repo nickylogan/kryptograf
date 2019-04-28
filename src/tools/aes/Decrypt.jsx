@@ -74,7 +74,7 @@ class Decrypt extends Component {
     return (
       <Row>
         <Col md="4">
-          <h3 className="font-weight-normal">Decryption</h3>
+          <h3 className="font-weight-normal"><span className="text-monospace text-info">#2</span> Decryption</h3>
           <p>Decrypt with 256-bit key</p>
         </Col>
         <Col md="6">
@@ -89,7 +89,7 @@ class Decrypt extends Component {
                 className={`text-monospace ${validCiphertext ? '' : 'is-invalid'}`}
                 value={ciphertext}
                 onChange={e => this.handleChangeCiphertext(e)}
-                placeholder="e.g. 0123456789abcdef:62e78b76c69736822a42373abe5193a3"
+                placeholder="Use the ciphertext generated from (#1), e.g. 0123456789abcdef:62e78b76c69736822a42373abe5193a3"
               />
               <Form.Text className="text-danger">
                 {validCiphertext ? (
@@ -110,7 +110,7 @@ class Decrypt extends Component {
                 className={`text-monospace ${validPassword ? '' : 'is-invalid'}`}
                 value={password}
                 onChange={e => this.handleChangePassword(e)}
-                placeholder="e.g. secret"
+                placeholder="Use the same password for encryption in (#1), e.g. secret"
               />
               <Form.Text className="text-danger">
                 {validPassword ? '' : 'Password cannot be empty!'}
@@ -123,16 +123,16 @@ class Decrypt extends Component {
                 rows="2"
                 size="sm"
                 type="text"
-                className={`text-monospace font-weight-bold ${
+                className={`text-monospace ${
                   validDecrypt === 1
-                    ? 'is-valid text-success'
+                    ? 'is-valid text-success font-weight-bold '
                     : validDecrypt === -1
-                    ? 'is-invalid text-danger'
+                    ? 'is-invalid text-danger font-weight-bold '
                     : ''
                 }`}
                 disabled
                 value={plaintext}
-                placeholder="Encrypted message will appear here"
+                placeholder="Decrypted message will appear here"
               />
             </Form.Group>
             <Button variant="info" onClick={e => this.handleDecrypt(e)}>

@@ -76,7 +76,7 @@ class Sign extends Component {
     return (
       <Row>
         <Col md="4">
-          <h3 className="font-weight-normal">Message signature</h3>
+          <h3 className="font-weight-normal"><span className="text-monospace text-info">#2</span> Message signature</h3>
           <p>The signature algorithm only supports <strong className="text-danger">secp256k1</strong> curve</p>
         </Col>
         <Col md="6">
@@ -105,13 +105,13 @@ class Sign extends Component {
                 className={`text-monospace ${validPriv ? '' : 'is-invalid'}`}
                 value={priv}
                 onChange={e => this.handleChangePrivKey(e)}
-                placeholder="e.g. 0f0f1e1e2d2d3c3c4b4b5a5a6969787887879696a5a5b4b4c3c3d2d2e1e1f0f0"
+                placeholder="Use the private key generated in (#1), e.g. 0f0f1e1e2d2d3c3c4b4b5a5a6969787887879696a5a5b4b4c3c3d2d2e1e1f0f0"
               />
               <Form.Text className="text-danger">
                 {validPriv ? '' : 'Private key must be a 256-bit hexadecimal string'}
               </Form.Text>
             </Form.Group>
-            <Form.Group controlId="genPubKey">
+            <Form.Group controlId="signHash">
               <Form.Label as="small">Hash (SHA-256)</Form.Label>
               <Form.Control
                 size="sm"
@@ -121,7 +121,7 @@ class Sign extends Component {
                 value={hash}
               />
             </Form.Group>
-            <Form.Group controlId="genPubKey">
+            <Form.Group controlId="signSignatuer">
               <Form.Label as="small">Signature (in DER format)</Form.Label>
               <Form.Control
                 as="textarea"

@@ -68,7 +68,7 @@ class Generator extends Component {
     return (
       <Row>
         <Col md="4">
-          <h3 className="font-weight-normal">Keypair generator</h3>
+          <h3 className="font-weight-normal"><span className="text-monospace text-info">#1</span> Keypair generator</h3>
           <p>
             The keypair generator uses the <strong className="text-danger">secp256k1</strong> curve. 
             Here's <a href="https://en.bitcoin.it/wiki/Secp256k1">more info</a> on how it works

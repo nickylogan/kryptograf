@@ -60,7 +60,7 @@ class Encrypt extends Component {
     return (
       <Row>
         <Col md="4">
-          <h3 className="font-weight-normal">Encryption</h3>
+          <h3 className="font-weight-normal"><span className="text-monospace text-info">#1</span> Encryption</h3>
           <p>
             Encrypt with 256-bit key
           </p>
