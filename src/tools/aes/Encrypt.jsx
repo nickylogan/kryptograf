@@ -31,6 +31,9 @@ class Encrypt extends Component {
     });
   }
 
+  /**
+   * Author: Nadya
+   */
   handleEncrypt(event) {
     const { password, plaintext } = this.state;
     const { validPassword, validPlaintext } = this.state;

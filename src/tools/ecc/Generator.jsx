@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import ecurve from 'ecurve';
+import { ec as EC } from 'elliptic';
 import crypto from 'crypto';
 import BigInteger from 'bigi';
 
@@ -44,19 +45,26 @@ class Generator extends Component {
   }
 
   /**
+   * Author: James
    * @param {SyntheticEvent} event
    */
   handleGenerate(event) {
+    // Retrieve form and event
     const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
-    if (form.checkValidity()) {
-      let priv = crypto.randomBytes(32);
-      let ecparams = ecurve.getCurveByName('secp256k1')
-      let curvePt = ecparams.G.multiply(BigInteger.fromBuffer(priv));
+
+
+    if (form.checkValidity()) { // Check if form is valid
+      let priv = crypto.randomBytes(32); // Generate private key using 'crypto' library
+      let ecparams = ecurve.getCurveByName('secp256k1'); // generate elliptic curve parameters using 'ecurve'
+                                                         // library with 'secp256k1'
+      let curvePt = ecparams.G.multiply(BigInteger.fromBuffer(priv)); // get curve point by multiplying the
+                                                                      // result G and the private key
       this.setState({
-        priv: priv.toString('hex'),
-        pub: curvePt.getEncoded(false).toString('hex'),
+        priv: priv.toString('hex'), // set the private key using the hex encoded generated private key
+        pub: curvePt.getEncoded(false).toString('hex'), // set the public key using the previously generated 
+                                                        // curve point
       });
       this.setState({ validated: false });
     } else {

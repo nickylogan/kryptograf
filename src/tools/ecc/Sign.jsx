@@ -18,6 +18,7 @@ class Sign extends Component {
   }
 
   /**
+   * Author: Yefta
    * @param {SyntheticEvent} event
    */
   handleSign(event) {

@@ -32,6 +32,9 @@ class Decrypt extends Component {
     });
   }
 
+  /**
+   * Author: Davis
+   */
   handleDecrypt(event) {
     const { password, ciphertext } = this.state;
     const { validPassword, validCiphertext } = this.state;

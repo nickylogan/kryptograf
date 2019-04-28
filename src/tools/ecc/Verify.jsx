@@ -20,10 +20,13 @@ class Verify extends Component {
   }
 
   /**
+   * Author: Nicky
    * @param {SyntheticEvent} event
    */
   handleVerify(event) {
-    const { message, signature, pub } = this.state;
+    const { message, signature, pub } = this.state; // Get data from form submission
+    
+    // Form validation
     const { validSignature, validMessage, validPub } = this.state;
     if (!message) {
       this.setState({ validMessage: false });
@@ -37,19 +40,23 @@ class Verify extends Component {
     if (!validSignature || !validMessage || !validPub) {
       return;
     }
-    const ec = new EC('secp256k1');
-    let messageBuf = Buffer.from(message, 'utf8');
+
+    const ec = new EC('secp256k1'); // Get secp56k1 ECC cipher object from 'EC' in the 'elliptic' library
+    let messageBuf = Buffer.from(message, 'utf8'); // Create buffer from message input
     let hashBuf = crypto
       .createHash('sha256')
       .update(messageBuf)
-      .digest();
-    let key = ec.keyFromPublic(pub, 'hex');
-    let verified;
+      .digest(); // Create SHA-256 hash of the inputted message
+    let key = ec.keyFromPublic(pub, 'hex'); // Get the public key input
+    let verified; // Value is 1 if valid, -1 if invalid
     try {
-      verified = key.verify(hashBuf, signature) ? 1 : -1;
+      verified = key.verify(hashBuf, signature) ? 1 : -1; // Verify if the hash and signature is valid
+                                                          // using the public key.
     } catch(e) {
-      verified = -1;
+      verified = -1; // Catch any errors from malformed input; meaning signature is invalid
     }
+
+    // Display data to form
     this.setState({
       hash: hashBuf.toString('hex'),
       verified: verified
